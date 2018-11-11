@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Ray_Hit : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+
+    float holdTime = 1.0f;
+    float timer = 0;
+
+    void Start () {
 		
 	}
 	
@@ -15,7 +18,16 @@ public class Ray_Hit : MonoBehaviour {
 		RaycastHit hit;
 
 		if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit)){
-			Debug.Log(hit.transform.name + " was hit!");
+
+			timer += Time.deltaTime;
+
+			if(hit.transform.name.Equals("Enemy")){
+				Debug.Log("Enemy was hit");
+                if (timer > holdTime){
+                    Destroy(hit.transform.gameObject);
+                    Debug.Log("Enemy was destroyed");
+                }
+			};
 		};
 
 	}
