@@ -11,16 +11,15 @@ public class Ray_Hit : MonoBehaviour {
     public Image LoadingBar;
     float currentValue;
     public float speed;
+    SphereCollider GameRoom;
 
     void Start () {
-		
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		
 		RaycastHit hit;
-
         if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit)){
             
 			timer += Time.deltaTime;
@@ -34,15 +33,17 @@ public class Ray_Hit : MonoBehaviour {
 
 	}
 
-	void HitCircleAnim (GameObject thenDestroy) {
+	void HitCircleAnim (GameObject hit) {
         if (currentValue <= 100)
         {
             currentValue += speed * Time.deltaTime;
             LoadingBar.fillAmount = currentValue / 100;
 		} else {
             ResetCircleAnim();
-			Destroy(thenDestroy);
-		}
+            SpawnNewHit(hit.transform.gameObject);
+        }
+
+
     }
 
 	void ResetCircleAnim(){
@@ -51,11 +52,14 @@ public class Ray_Hit : MonoBehaviour {
         currentValue = 0;
 	}
 
-    /* void SpawnNewHit(){
+    void SpawnNewHit(GameObject hit){
+        SphereCollider GameRoom = GameObject.FindGameObjectWithTag("GameRoom").GetComponent<SphereCollider>();
 
-        Instantiate(thenDestroy);
+        Vector3 spawn = new Vector3((Random.value * 2 - 1) * GameRoom.radius,
+              (Random.value * 2 - 1) * GameRoom.radius,
+             (Random.value * 2 - 1) * GameRoom.radius);
 
-        if (instantiatedObject.transform.position.x > bounds1 && (instantiatedObject.transform.position.z < bounds2)
- { GetRandomCoords(); InstantiateObject(); }
-	}  */
+        hit.transform.position = spawn;
+
+	}
 }
