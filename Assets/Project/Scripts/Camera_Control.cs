@@ -9,6 +9,7 @@ public class Camera_Control : MonoBehaviour
     public float vertical = 0;
     public float mouseSensitivity = 1;
     public GameObject player;
+    public GameObject player_camera;
 
     void Update()
     {
@@ -17,6 +18,6 @@ public class Camera_Control : MonoBehaviour
         vertical = Mathf.Clamp(vertical, -90, 90);
 
         player.transform.Rotate(0, horizontal, 0);
-        Camera.main.transform.localRotation = Quaternion.Euler(vertical, 0, 0);
+        player_camera.transform.localRotation = Quaternion.Euler(vertical, 0, 0);
     }
 }
