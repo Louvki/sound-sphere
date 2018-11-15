@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class Ray_Hit : MonoBehaviour {
 
 
-    float holdTime = 1.0f;
     float timer = 0;
     public Image LoadingBar;
     float currentValue;
