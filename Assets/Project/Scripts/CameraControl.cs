@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Camera_Control : MonoBehaviour
+public class CameraControl : MonoBehaviour
 {
 
     public float horizontal = 0;
