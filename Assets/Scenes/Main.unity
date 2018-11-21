@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 290638619}
   m_Layer: 0
   m_Name: OuterCircle
-  m_TagString: Untagged
+  m_TagString: LoadingBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da8db275a19ab4419a97cbb1eb24c1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LoadingBar: {fileID: 290638619}
+  loadingBar: {fileID: 290638619}
 --- !u!1 &612608757 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100002, guid: 126d619cf4daa52469682f85c1378b4a,
