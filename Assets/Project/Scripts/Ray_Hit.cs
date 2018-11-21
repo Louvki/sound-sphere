@@ -10,7 +10,8 @@ public class Ray_Hit : MonoBehaviour {
     public Image LoadingBar;
     float currentValue;
     public float speed;
-    SphereCollider GameRoom;
+    public float distanceBetweenEnemiesSpawns;
+
 
     void Start () {
     }
@@ -52,13 +53,17 @@ public class Ray_Hit : MonoBehaviour {
 	}
 
     void SpawnNewHit(GameObject hit){
-        SphereCollider GameRoom = GameObject.FindGameObjectWithTag("GameRoom").GetComponent<SphereCollider>();
+        Vector3 newPos = GenerateNewEnemySpawn();
 
-        Vector3 spawn = new Vector3((Random.value * 2 - 1) * GameRoom.radius,
-              (Random.value * 2 - 1) * GameRoom.radius,
-             (Random.value * 2 - 1) * GameRoom.radius);
+        while(Vector3.Distance(hit.transform.position, newPos) < distanceBetweenEnemiesSpawns){
+            newPos = GenerateNewEnemySpawn();
+        }
 
-        hit.transform.position = spawn;
+        hit.transform.position = newPos;
 
-	}
+    }
+
+    Vector3 GenerateNewEnemySpawn(){
+        return Random.insideUnitSphere * distanceBetweenEnemiesSpawns;
+    }
 }
