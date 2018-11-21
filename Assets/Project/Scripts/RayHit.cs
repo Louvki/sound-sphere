@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,10 +9,11 @@ public class RayHit : MonoBehaviour {
     private float speed = 160;
     public Image loadingBar;
     Enemy enemy = new Enemy();
+    StopWatchHelper sw = new StopWatchHelper();
 
 
     void Start () {
-        
+        sw.StartStopWatch();
     }
 	
 	// Update is called once per frame
@@ -42,6 +42,7 @@ public class RayHit : MonoBehaviour {
         {
             ResetCircleAnim();
             enemy.SpawnNewHit(hit.transform.gameObject);
+            sw.ResetAndStartStopWatch();
         }
 
 
