@@ -11,6 +11,7 @@ public class Ray_Hit : MonoBehaviour {
     float currentValue;
     public float speed;
     public float distanceBetweenEnemiesSpawns;
+    StopWatch sw = new StopWatch();
 
 
     void Start () {
@@ -41,6 +42,7 @@ public class Ray_Hit : MonoBehaviour {
 		} else {
             ResetCircleAnim();
             SpawnNewHit(hit.transform.gameObject);
+            sw.ResetStopWatch();
         }
 
 
