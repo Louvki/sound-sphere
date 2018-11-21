@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Ray_Hit : MonoBehaviour {
+public class RayHit : MonoBehaviour {
 
 
     float timer = 0;
