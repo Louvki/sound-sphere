@@ -113,6 +113,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &146173142 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 101810, guid: ccf8c8cc05aad7b40a8deb4f73296da4,
+    type: 2}
+  m_PrefabInternal: {fileID: 753418400}
 --- !u!1 &346424418
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,6 +333,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   times: {fileID: 1841782123}
+  enemy: {fileID: 1823916949}
+  guiReticle: {fileID: 146173142}
 --- !u!224 &1148443375 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 22499000, guid: ccf8c8cc05aad7b40a8deb4f73296da4,
