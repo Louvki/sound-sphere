@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StopWatchHelper : MonoBehaviour {
 
     public Stopwatch sw = new Stopwatch();
-    public List<TimeSpan> reactionTimes = new List<TimeSpan>();
-	void Start () {
+    UiControl uiCtrl = new UiControl();
+    void Start () {
         sw.Start();
 	}
 	
@@ -22,7 +23,7 @@ public class StopWatchHelper : MonoBehaviour {
     public void ResetAndStartStopWatch()
     {
         sw.Stop();
-		UnityEngine.Debug.Log(sw.Elapsed);
+        uiCtrl.addTimeToText(sw.Elapsed);
         sw.Reset();
         sw.Start();
     }

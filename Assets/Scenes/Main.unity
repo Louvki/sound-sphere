@@ -332,9 +332,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3e311fd29635a4489a5f5a6514414f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  times: {fileID: 1841782123}
   enemy: {fileID: 1823916949}
   guiReticle: {fileID: 146173142}
+--- !u!114 &753418412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 753418403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68ec2fe99d1108b9d0006a298d76c639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axes: 0
+  sensitivityX: 15
+  sensitivityY: 15
+  minimumX: -360
+  maximumX: 360
+  minimumY: -60
+  maximumY: 60
 --- !u!224 &1148443375 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 22499000, guid: ccf8c8cc05aad7b40a8deb4f73296da4,
@@ -753,7 +770,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1841782122
 RectTransform:
   m_ObjectHideFlags: 0
@@ -795,7 +812,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 2
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 0
@@ -804,26 +821,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '00:07.23 ON
-
-    00:07.23 ON
-
-    00:07.23 ON
-
-    00:07.23 ON
-
-    00:07.23 ON
-
-
-    00:07.23 ON
-
-    00:07.23 ON
-
-    00:07.23 ON
-
-    00:07.23 ON
-
-    00:07.23 ON'
+  m_Text: Time   Boxes   Reticle
 --- !u!222 &1841782124
 CanvasRenderer:
   m_ObjectHideFlags: 0
