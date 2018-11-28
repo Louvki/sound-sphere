@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113e4aa2cd3db44d1ac0cb7e9794964b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  globalGainDb: 0
+  globalGainDb: 24
   occlusionMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -550,7 +550,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 248799cb4acba48f7b3ee842a80f788c,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 6bb08e1e09aae4a4f849a4a7da901761, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 187f3676149694364858bfcf8273c523, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
