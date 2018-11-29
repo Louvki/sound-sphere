@@ -2,32 +2,58 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
+public class Enemy : MonoBehaviour
+{
 
     private float distanceBetweenEnemiesSpawns = 5;
+    public int numberOfBoxes = 5;
 
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
 
     public void SpawnNewHit(GameObject hit)
     {
-        Vector3 newPos = GenerateNewEnemySpawn();
+        List<Vector3> positions = new List<Vector3>();
 
-        while (Vector3.Distance(hit.transform.position, newPos) < distanceBetweenEnemiesSpawns)
+        deSpawnBoxes();
+
+        while (positions.Count < numberOfBoxes)
         {
-            newPos = GenerateNewEnemySpawn();
+
+            Vector3 newPos = GenerateNewEnemySpawn();
+
+            if (Vector3.Distance(hit.transform.position, newPos) > distanceBetweenEnemiesSpawns)
+            {
+                positions.Add(newPos);
+            }
         }
 
-        hit.transform.position = newPos;
 
+        int randInt = Random.Range(1, numberOfBoxes);
+        positions.ForEach(x =>
+        {
+            GameObject box = Instantiate(hit, x, Quaternion.identity);
+            if(positions.IndexOf(x) == randInt)
+            {
+                box.transform.name = "Enemy";
+            }
+        });
+    }
+
+    private void deSpawnBoxes()
+    {
+        List<GameObject> boxList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+        boxList.ForEach(x => Destroy(x));
     }
 
     Vector3 GenerateNewEnemySpawn()
