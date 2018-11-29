@@ -24,7 +24,7 @@ public class UiControl : MonoBehaviour {
         {
             times.enabled = false;
         }
-        if (OVRInput.GetDown(OVRInput.Button.Back))
+        if (OVRInput.GetDown(OVRInput.Button.Back) || Input.GetKeyUp(KeyCode.B))
         {
 			if(enemy.enabled){
                 enemy.enabled = false;
@@ -32,7 +32,7 @@ public class UiControl : MonoBehaviour {
                 enemy.enabled = true;
             }
         }
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryTouchpad))
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryTouchpad) || Input.GetKeyUp(KeyCode.V))
         {
             if (guiReticle.gameObject.activeSelf)
             {
