@@ -46,6 +46,8 @@ public class Enemy : MonoBehaviour
             if(positions.IndexOf(x) == randInt)
             {
                 box.transform.name = "Enemy";
+                box.GetComponent<AudioSource>().enabled = true;
+                box.GetComponent<ResonanceAudioSource>().enabled = true;
             }
         });
     }
