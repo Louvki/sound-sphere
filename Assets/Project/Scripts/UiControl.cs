@@ -8,9 +8,12 @@ public class UiControl : MonoBehaviour {
 
     private Text times;
     private List<ScoreBoardEntry> timeList;
-    public Renderer enemy;
+    public List<Renderer> enemyList;
 	// Use this for initialization
 	public GameObject guiReticle;
+
+    void Awake(){}
+
 	void Start () {
         this.times = GameObject.Find("TimeText").GetComponent<Text>();
 	}
@@ -24,15 +27,15 @@ public class UiControl : MonoBehaviour {
         {
             times.enabled = false;
         }
-        if (OVRInput.GetDown(OVRInput.Button.Back))
+        if (OVRInput.GetDown(OVRInput.Button.Back) || Input.GetKeyUp(KeyCode.B))
         {
-			if(enemy.enabled){
-                enemy.enabled = false;
+			if(enemyList[0].enabled){
+                enemyList[0].enabled = false;
             }else{
-                enemy.enabled = true;
+                enemyList[0].enabled = true;
             }
         }
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryTouchpad))
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryTouchpad) || Input.GetKeyUp(KeyCode.Tab))
         {
             if (guiReticle.gameObject.activeSelf)
             {
@@ -47,8 +50,19 @@ public class UiControl : MonoBehaviour {
 
     public void addTimeToText(TimeSpan time){
         this.times = GameObject.Find("TimeText").GetComponent<Text>();
-        ScoreBoardEntry entry = buildScoreBoardEntry(time);
-        this.times.text = this.times.text + "\n" + entry.ToString();
+
+        List<Renderer> fuckList = new List<Renderer>();
+        new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy")).ForEach(x =>
+        {
+            fuckList.Add(x.GetComponent<Renderer>());
+        });
+
+        GameObject reticle = GameObject.Find("GUIReticle");
+
+        this.times.text = this.times.text + "\n"
+         + time + "   " 
+         + fuckList[0].enabled 
+         + "   " + reticle.gameObject.activeSelf + "\n";
     }
 
     public class ScoreBoardEntry{
@@ -66,9 +80,5 @@ public class UiControl : MonoBehaviour {
         {
             return this.time + "   " + this.boxesEnabled + "   " + this.reticleEnabled + "\n";
         }
-    }
-
-    private ScoreBoardEntry buildScoreBoardEntry(TimeSpan time){
-        return new ScoreBoardEntry(time, enemy, guiReticle);
     }
 }

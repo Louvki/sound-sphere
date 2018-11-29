@@ -13,6 +13,7 @@ public class StopWatchHelper : MonoBehaviour {
     UiControl uiCtrl = new UiControl();
     void Start () {
         sw.Start();
+        UnityEngine.Debug.Log("Stopwatch Start!");
 	}
 	
 	// Update is called once per frame
