@@ -24,7 +24,7 @@ public class UiControl : MonoBehaviour {
         {
             times.enabled = false;
         }
-        if (OVRInput.GetDown(OVRInput.Button.Back) || Input.GetKeyUp(KeyCode.B))
+        if (OVRInput.GetDown(OVRInput.Button.Back))
         {
 			if(enemy.enabled){
                 enemy.enabled = false;
@@ -32,7 +32,7 @@ public class UiControl : MonoBehaviour {
                 enemy.enabled = true;
             }
         }
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryTouchpad) || Input.GetKeyUp(KeyCode.V))
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryTouchpad))
         {
             if (guiReticle.gameObject.activeSelf)
             {
@@ -49,7 +49,6 @@ public class UiControl : MonoBehaviour {
         this.times = GameObject.Find("TimeText").GetComponent<Text>();
         ScoreBoardEntry entry = buildScoreBoardEntry(time);
         this.times.text = this.times.text + "\n" + entry.ToString();
-        Debug.Log(timeList.ToString());
     }
 
     public class ScoreBoardEntry{
