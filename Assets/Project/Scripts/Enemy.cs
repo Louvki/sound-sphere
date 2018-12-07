@@ -1,65 +1,52 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public GameObject enemy;
 
-    private float distanceBetweenEnemiesSpawns = 5;
-    public int numberOfBoxes = 5;
-
-    // Use this for initialization
-    void Start()
+    public Enemy(GameObject enemy, float x, float y, float z)
     {
-
+        this.enemy = enemy;
+        Instantiate(enemy, new Vector3(x, y, z), Quaternion.identity);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void toggleComplex()
     {
-
-    }
-
-
-    public void SpawnNewHit(GameObject hit)
-    {
-        List<Vector3> positions = new List<Vector3>();
-
-        deSpawnBoxes();
-
-        while (positions.Count < numberOfBoxes)
+        foreach (Transform child in enemy.transform)
         {
-
-            Vector3 newPos = GenerateNewEnemySpawn();
-
-            if (Vector3.Distance(hit.transform.position, newPos) > distanceBetweenEnemiesSpawns)
+            if (child.name == "Simple")
             {
-                positions.Add(newPos);
+                child.gameObject.SetActive(false);
+            } else {
+                System.Random r = new System.Random();
+                int happyOrAngry = r.Next(1);
+
+                if (happyOrAngry == 1)
+                {
+                    child.gameObject.SetActive(false);
+                } else
+                {
+                    child.gameObject.SetActive(true);
+                }
             }
         }
+    }
 
-
-        int randInt = Random.Range(1, numberOfBoxes);
-        positions.ForEach(x =>
+    public void toggleSimple()
+    {
+        foreach (Transform child in enemy.transform)
         {
-            GameObject box = Instantiate(hit, x, Quaternion.identity);
-            if(positions.IndexOf(x) == randInt)
+            if (child.name == "Happy" || child.name == "Angry" ) {
+                child.gameObject.SetActive(false);
+            };
+            if(child.name == "Simple")
             {
-                box.transform.name = "Enemy";
-                box.GetComponent<AudioSource>().enabled = true;
-                box.GetComponent<ResonanceAudioSource>().enabled = true;
+                child.gameObject.SetActive(true);
             }
-        });
-    }
-
-    private void deSpawnBoxes()
-    {
-        List<GameObject> boxList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
-        boxList.ForEach(x => Destroy(x));
-    }
-
-    Vector3 GenerateNewEnemySpawn()
-    {
-        return Random.insideUnitSphere * distanceBetweenEnemiesSpawns;
+        }
     }
 }
+

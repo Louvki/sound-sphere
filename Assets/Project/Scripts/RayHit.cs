@@ -2,34 +2,42 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RayHit : MonoBehaviour {
-
-
+public class RayHit : MonoBehaviour
+{
     float currentValue;
-    private float speed = 160;
+    private float speed = 100;
     public Image loadingBar;
-    Enemy enemy = new Enemy();
     StopWatchHelper sw = new StopWatchHelper();
 
+    public RayHit(Image loadingBar)
+    {
+        this.loadingBar = loadingBar;
+    }
 
-    void Start () {
+    void Start()
+    {
         sw.StartStopWatch();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-		RaycastHit hit;
-        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit)){
-            
-			if(hit.transform.name.Equals("Enemy")){
-				HitCircleAnim(hit.transform.gameObject);
-			}
-		}else{
+
+    // Update is called once per frame
+    void Update()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit))
+        {
+
+            Debug.Log(hit.transform.name);
+            if (hit.transform.name.Equals("Enemy") || hit.transform.name.Equals("Start"))
+            {
+                HitCircleAnim(hit.transform.gameObject);
+            }
+        }
+        else
+        {
             ResetCircleAnim();
         };
 
-	}
+    }
 
     public void HitCircleAnim(GameObject hit)
     {
@@ -41,7 +49,16 @@ public class RayHit : MonoBehaviour {
         else
         {
             ResetCircleAnim();
-            enemy.SpawnNewHit(hit.transform.gameObject);
+            if (hit.transform.name.Equals("Enemy"))
+            {
+                //enemy.SpawnNewHit(hit.transform.gameObject);
+            }
+
+            if (hit.transform.name.Equals("Start"))
+            {
+                 
+            }
+
             sw.ResetAndStartStopWatch();
         }
 

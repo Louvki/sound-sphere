@@ -15,17 +15,17 @@ public class UiControl : MonoBehaviour {
     void Awake(){}
 
 	void Start () {
-        this.times = GameObject.Find("TimeText").GetComponent<Text>();
+        //this.times = GameObject.Find("TimeText").GetComponent<Text>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if(OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) || Input.GetKeyDown(KeyCode.Tab)){
-            times.enabled = true;
+            //times.enabled = true;
         }
         if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger) || Input.GetKeyUp(KeyCode.Tab))
         {
-            times.enabled = false;
+            //times.enabled = false;
         }
         if (OVRInput.GetDown(OVRInput.Button.Back) || Input.GetKeyUp(KeyCode.B))
         {
@@ -49,7 +49,7 @@ public class UiControl : MonoBehaviour {
     }
 
     public void addTimeToText(TimeSpan time){
-        this.times = GameObject.Find("TimeText").GetComponent<Text>();
+        //this.times = GameObject.Find("TimeText").GetComponent<Text>();
 
         List<Renderer> fuckList = new List<Renderer>();
         new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy")).ForEach(x =>
@@ -59,10 +59,10 @@ public class UiControl : MonoBehaviour {
 
         GameObject reticle = GameObject.Find("GUIReticle");
 
-        this.times.text = this.times.text + "\n"
-         + time + "   " 
-         + fuckList[0].enabled 
-         + "   " + reticle.gameObject.activeSelf + "\n";
+        //this.times.text = this.times.text + "\n"
+        // + time + "   " 
+        // + fuckList[0].enabled 
+        // + "   " + reticle.gameObject.activeSelf + "\n";
     }
 
     public class ScoreBoardEntry{
