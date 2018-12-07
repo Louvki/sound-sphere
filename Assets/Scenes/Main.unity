@@ -278,6 +278,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 1701105537899314, guid: 7c17ea3cbdba28d4d8ac35e99cf1e81a, type: 2}
   rayHitImage: {fileID: 753418402}
+  menu: {fileID: 1680519548}
+  description: {fileID: 940607877}
 --- !u!143 &346424420
 CharacterController:
   m_ObjectHideFlags: 0
@@ -288,8 +290,8 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5000001
+  m_Height: 1
+  m_Radius: 1
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -720,8 +722,8 @@ MonoBehaviour:
   sensitivityY: 15
   minimumX: -360
   maximumX: 360
-  minimumY: -60
-  maximumY: 60
+  minimumY: -90
+  maximumY: 90
 --- !u!1 &857959264
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,6 +1035,7 @@ GameObject:
   - component: {fileID: 1532374377}
   - component: {fileID: 1532374376}
   - component: {fileID: 1532374375}
+  - component: {fileID: 1532374378}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -1106,6 +1109,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1532374373}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1532374378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1532374373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b45c0ee0f239f4a4d9a2e2d183a8ffe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1639064735
 GameObject:
   m_ObjectHideFlags: 0

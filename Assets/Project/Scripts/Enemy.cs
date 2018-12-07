@@ -5,17 +5,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public GameObject enemy;
-
-    public Enemy(GameObject enemy, float x, float y, float z)
-    {
-        this.enemy = enemy;
-        Instantiate(enemy, new Vector3(x, y, z), Quaternion.identity);
-    }
-
     public void toggleComplex()
     {
-        foreach (Transform child in enemy.transform)
+        foreach (Transform child in transform)
         {
             if (child.name == "Simple")
             {
@@ -37,7 +29,7 @@ public class Enemy : MonoBehaviour
 
     public void toggleSimple()
     {
-        foreach (Transform child in enemy.transform)
+        foreach (Transform child in transform)
         {
             if (child.name == "Happy" || child.name == "Angry" ) {
                 child.gameObject.SetActive(false);

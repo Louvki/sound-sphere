@@ -9,6 +9,9 @@ public class Main : MonoBehaviour
     public GameObject enemy;
     public Image rayHitImage;
 
+    public GameObject menu;
+    public GameObject description;
+
     RayHit rayhit;
     EnemyInitializer enemyInitService = new EnemyInitializer();
     List<TestCase> testCases = new List<TestCase>();
@@ -17,21 +20,37 @@ public class Main : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        rayhit = new RayHit(rayHitImage);
+        // Initializing Rayhit and registering the event listeners.
+        // FIXME: Needs to fixed, it registers the hit too fast. Should be simple
+        rayhit = gameObject.AddComponent(typeof(RayHit)) as RayHit;
+        rayhit.StartHitEvent += StartUseCase;
+        rayhit.EnemyHitEvent += SourceFound;
+
+        // Initialize enemies, testcases and start the program by loading the next case
         enemyInitService.InitializeEnemyList(enemy);
         InitTestCases();
         LoadNextTestCase();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void LoadNextTestCase()
     {
+        currentTestCaseIndex++;
+        LoadTestCaseStartScreen();
     }
 
+    private void LoadTestCaseStartScreen()
+    {
+        enemyInitService.showEnemies(false);
+        enemyInitService.muteAllEnemies();
+
+        menu.SetActive(true);
+        description.GetComponent<TextMesh>().text = testCases[currentTestCaseIndex].description;
+    }
 
     public void SourceFound(TimeSpan time)
     {
         testCases[currentTestCaseIndex].SourceFound(time);
+        this.enemyInitService.initializeRandomAudioSource();
         if (testCases[currentTestCaseIndex].IsFinished())
         {
             if (testCases.Count == currentTestCaseIndex + 1)
@@ -45,25 +64,11 @@ public class Main : MonoBehaviour
         }
     }
 
-    private void LoadNextTestCase()
-    {
-        currentTestCaseIndex++;
-        LoadTestCaseStartScreen();
-    }
-
-    private void LoadTestCaseStartScreen()
-    {
-        GameObject start = GameObject.Find("Start");
-        GameObject description = GameObject.Find("Description");
-        description.GetComponent<Text>().text = testCases[currentTestCaseIndex].description;
-
-        description.SetActive(true);
-        start.SetActive(true);
-    }
-
     public void StartUseCase()
     {
-        
+        menu.SetActive(false);
+        enemyInitService.showEnemies(true);
+        enemyInitService.initializeRandomAudioSource();
     }
 
     private void LoadEndScreen()

@@ -12,7 +12,7 @@ public class TestCase {
 
     List<TimeSpan> times = new List<TimeSpan>();
     int timesFound = 0;
-    int findLimit = 10;
+    int findLimit = 2;
 
     public TestCase(string name, string description, bool blind, bool restricted, bool simpleVisual)
     {

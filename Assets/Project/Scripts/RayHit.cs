@@ -1,12 +1,18 @@
-﻿
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class RayHit : MonoBehaviour
 {
+    public delegate void EnemyHit(TimeSpan time);
+    public delegate void StartHit();
+    public event EnemyHit EnemyHitEvent;
+    public event StartHit StartHitEvent;
+
+
     float currentValue;
     private float speed = 100;
-    public Image loadingBar;
+    public Image loadingBar = GameObject.Find("UISelectionBar").GetComponent<Image>();
     StopWatchHelper sw = new StopWatchHelper();
 
     public RayHit(Image loadingBar)
@@ -16,7 +22,7 @@ public class RayHit : MonoBehaviour
 
     void Start()
     {
-        sw.StartStopWatch();
+        //sw.StartStopWatch();
     }
 
     // Update is called once per frame
@@ -25,11 +31,20 @@ public class RayHit : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit))
         {
-
-            Debug.Log(hit.transform.name);
-            if (hit.transform.name.Equals("Enemy") || hit.transform.name.Equals("Start"))
+            if (hit.transform.tag.Equals("Enemy") && hit.transform.GetComponent<AudioSource>().enabled == true)
             {
-                HitCircleAnim(hit.transform.gameObject);
+                if (EnemyHitEvent != null)
+                {
+                    var ee = new TimeSpan(1);
+                    EnemyHitEvent(ee);
+                }
+            }
+            if (hit.transform.name.Equals("Start"))
+            {
+                if (StartHitEvent != null)
+                {
+                    StartHitEvent();
+                }
             }
         }
         else
@@ -56,10 +71,10 @@ public class RayHit : MonoBehaviour
 
             if (hit.transform.name.Equals("Start"))
             {
-                 
+
             }
 
-            sw.ResetAndStartStopWatch();
+            //sw.ResetAndStartStopWatch();
         }
 
 
@@ -67,7 +82,11 @@ public class RayHit : MonoBehaviour
 
     public void ResetCircleAnim()
     {
+        if (loadingBar)
+        {
+
         loadingBar.fillAmount = 0f;
+        }
         currentValue = 0;
     }
 
