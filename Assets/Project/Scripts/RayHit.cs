@@ -13,7 +13,6 @@ public class RayHit : MonoBehaviour
     float currentValue;
     private float speed = 100;
     public Image loadingBar;
-    StopWatchHelper sw = new StopWatchHelper();
 
     void Start()
     {
@@ -42,7 +41,6 @@ public class RayHit : MonoBehaviour
                         var ee = new TimeSpan(1);
                         EnemyHitEvent(ee);
                         ResetCircleAnim();
-                        //sw.ResetAndStartStopWatch();
                     }
                 }
             } else if (hit.transform.name.Equals("Start"))
@@ -58,7 +56,6 @@ public class RayHit : MonoBehaviour
                     {
                         StartHitEvent();
                         ResetCircleAnim();
-                        //sw.ResetAndStartStopWatch();
                     }
                 }
             }else

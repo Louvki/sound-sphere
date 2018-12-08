@@ -43,7 +43,12 @@ public class EnemyInitializer : MonoBehaviour
     {
         muteAllEnemies();
         System.Random r = new System.Random();
-        enemies[r.Next(enemies.Count - 1)].transform.GetComponent<AudioSource>().enabled = true;
+        var enemy = enemies[r.Next(enemies.Count - 1)];
+        enemy.transform.GetComponent<AudioSource>().enabled = true;
+
+        //Delete
+        disableAllEnemies();
+        enemy.SetActive(true);
     }
 
     public void toggleSimpleDisplay()

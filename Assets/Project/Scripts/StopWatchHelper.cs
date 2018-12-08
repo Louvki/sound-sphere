@@ -11,9 +11,9 @@ public class StopWatchHelper : MonoBehaviour {
 
     public Stopwatch sw = new Stopwatch();
     UiControl uiCtrl = new UiControl();
+    Main main;
     void Start () {
         sw.Start();
-        UnityEngine.Debug.Log("Stopwatch Start!");
 	}
 	
 	// Update is called once per frame
@@ -21,12 +21,13 @@ public class StopWatchHelper : MonoBehaviour {
 		
 	}
 
-    public void ResetAndStartStopWatch()
+    public TimeSpan ResetAndStartStopWatch()
     {
+        var elapsed = sw.Elapsed;
         sw.Stop();
-        uiCtrl.addTimeToText(sw.Elapsed);
         sw.Reset();
         sw.Start();
+        return elapsed;;
     }
 
     public void StartStopWatch(){

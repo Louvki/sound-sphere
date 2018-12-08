@@ -10,7 +10,7 @@ public class TestCase {
     bool restricted;
     bool simpleVisual;
 
-    List<TimeSpan> times = new List<TimeSpan>();
+    public List<TimeSpan> times = new List<TimeSpan>();
     int timesFound = 0;
     int findLimit = 2;
 

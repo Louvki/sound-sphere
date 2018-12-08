@@ -16,10 +16,13 @@ public class Main : MonoBehaviour
     EnemyInitializer enemyInitService = new EnemyInitializer();
     List<TestCase> testCases = new List<TestCase>();
     int currentTestCaseIndex = -1;
+    StopWatchHelper swh;
 
     // Use this for initialization
     void Start()
     {
+        this.swh = new StopWatchHelper();
+
         // Initializing Rayhit and registering the event listeners.
         // FIXME: Needs to fixed, it registers the hit too fast. Should be simple
         rayhit = gameObject.AddComponent(typeof(RayHit)) as RayHit;
@@ -48,8 +51,10 @@ public class Main : MonoBehaviour
     }
 
     public void SourceFound(TimeSpan time)
-    {
-        testCases[currentTestCaseIndex].SourceFound(time);
+    {   
+
+        testCases[currentTestCaseIndex].SourceFound(swh.ResetAndStartStopWatch());
+        swh.ResetAndStartStopWatch();
         this.enemyInitService.initializeRandomAudioSource();
         if (testCases[currentTestCaseIndex].IsFinished())
         {
@@ -62,10 +67,13 @@ public class Main : MonoBehaviour
                 LoadNextTestCase();
             }
         }
+        Debug.Log("-----------------------------------");
+        testCases[currentTestCaseIndex].times.ForEach(x => Debug.Log(x));
     }
 
     public void StartUseCase()
     {
+        swh.StartStopWatch();
         menu.SetActive(false);
         enemyInitService.showEnemies(true);
         enemyInitService.initializeRandomAudioSource();
