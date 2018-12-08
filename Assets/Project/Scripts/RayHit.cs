@@ -6,8 +6,10 @@ public class RayHit : MonoBehaviour
 {
     public delegate void EnemyHit(TimeSpan time);
     public delegate void StartHit();
+    public delegate void RestartHit();
     public event EnemyHit EnemyHitEvent;
     public event StartHit StartHitEvent;
+    public event RestartHit RestartHitEvent;
 
 
     float currentValue;
@@ -58,7 +60,23 @@ public class RayHit : MonoBehaviour
                         ResetCircleAnim();
                     }
                 }
-            }else
+            }else if (hit.transform.name.Equals("Restart"))
+            {
+                if (StartHitEvent != null)
+                {
+                    if (currentValue <= 100)
+                    {
+                        currentValue += speed * Time.deltaTime;
+                        loadingBar.fillAmount = currentValue / 100;
+                    }
+                    else
+                    {
+                        RestartHitEvent();
+                        ResetCircleAnim();
+                    }
+                }
+            }
+            else
             {
                 ResetCircleAnim();
             }

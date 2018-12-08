@@ -10,7 +10,7 @@ public class TestCase {
     bool restricted;
     bool simpleVisual;
 
-    List<FoundObject> objects = new List<FoundObject>();
+    public List<FoundObject> objects = new List<FoundObject>();
     int timesFound = 0;
     int findLimit = 2;
 
@@ -35,7 +35,7 @@ public class TestCase {
         return timesFound == findLimit;
     }
 
-    class FoundObject{
+    public class FoundObject{
         Vector3 position;
         TimeSpan time;
 
@@ -46,7 +46,30 @@ public class TestCase {
 
         public override string ToString()
         {
-            return "Time: " + this.time + "/n" + "Position: " + this.position;
+            return "Time: " + this.time + " Position: " + this.position;
         }
+
+        public TimeSpan getTime(){
+            return this.time;
+        }
+
+        public Vector3 getPosition(){
+            return this.position;
+        }
+    }
+
+    public override string ToString()
+    {
+        string str = 
+        this.name + System.Environment.NewLine + 
+        this.description + System.Environment.NewLine + 
+        "Blind: " + this.blind + System.Environment.NewLine + 
+        "Restricted: " + this.restricted + System.Environment.NewLine + 
+        "SimpleVisual: " + this.simpleVisual + System.Environment.NewLine;
+        objects.ForEach(x => {
+            str += " " + x.getTime().ToString() + " " + x.getPosition().ToString() + System.Environment.NewLine;
+        });
+
+        return str;
     }
 }

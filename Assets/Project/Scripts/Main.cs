@@ -10,7 +10,9 @@ public class Main : MonoBehaviour
     public Image rayHitImage;
 
     public GameObject menu;
+    public GameObject endScreen;
     public GameObject description;
+    public GameObject infoTable;
 
     RayHit rayhit;
     EnemyInitializer enemyInitService = new EnemyInitializer();
@@ -28,6 +30,7 @@ public class Main : MonoBehaviour
         rayhit = gameObject.AddComponent(typeof(RayHit)) as RayHit;
         rayhit.StartHitEvent += StartUseCase;
         rayhit.EnemyHitEvent += SourceFound;
+        rayhit.RestartHitEvent += RestartUseCase;
 
         // Initialize enemies, testcases and start the program by loading the next case
         enemyInitService.InitializeEnemyList(enemy);
@@ -69,6 +72,11 @@ public class Main : MonoBehaviour
         }
     }
 
+    public void RestartUseCase(){
+        this.endScreen.SetActive(false);
+        LoadTestCaseStartScreen();
+    }
+
     public void StartUseCase()
     {
         swh.StartStopWatch();
@@ -79,7 +87,13 @@ public class Main : MonoBehaviour
 
     private void LoadEndScreen()
     {
-
+        testCases.ForEach(x =>
+        {
+            infoTable.GetComponent<TextMesh>().text += x.ToString() + "\n";
+        });
+        enemyInitService.showEnemies(false);
+        enemyInitService.muteAllEnemies();
+        endScreen.SetActive(true);
     }
 
     private void InitTestCases()
