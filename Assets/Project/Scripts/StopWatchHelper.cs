@@ -10,11 +10,6 @@ using UnityEngine.UI;
 public class StopWatchHelper : MonoBehaviour {
 
     public Stopwatch sw = new Stopwatch();
-    UiControl uiCtrl = new UiControl();
-    Main main;
-    void Start () {
-        sw.Start();
-	}
 	
 	// Update is called once per frame
 	void Update () {

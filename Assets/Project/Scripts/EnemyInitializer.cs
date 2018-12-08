@@ -48,8 +48,8 @@ public class EnemyInitializer : MonoBehaviour
         enemy.transform.GetComponent<AudioSource>().enabled = true;
 
         //Delete
-        disableAllEnemies();
-        enemy.SetActive(true);
+        //disableAllEnemies();
+        //enemy.SetActive(true);
     }
 
     public void toggleSimpleDisplay()

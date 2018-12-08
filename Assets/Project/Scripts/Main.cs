@@ -46,11 +46,13 @@ public class Main : MonoBehaviour
 
     private void LoadTestCaseStartScreen()
     {
+
+        TestCase curTestCase = testCases[currentTestCaseIndex];
         enemyInitService.showEnemies(false);
         enemyInitService.muteAllEnemies();
 
         menu.SetActive(true);
-        description.GetComponent<TextMesh>().text = testCases[currentTestCaseIndex].description;
+        description.GetComponent<TextMesh>().text = curTestCase.description;
     }
 
     public void SourceFound(TimeSpan time)
@@ -79,9 +81,23 @@ public class Main : MonoBehaviour
 
     public void StartUseCase()
     {
+        TestCase curTestCase = testCases[currentTestCaseIndex];
+
+        if (curTestCase.getBlind())
+        {
+            enemyInitService.disableAllEnemies();
+        }else{
+            enemyInitService.enableAllEnemies();
+        }
+
+        if(curTestCase.getSimpleVisual()){
+            enemyInitService.toggleSimpleDisplay();
+        }else{
+            enemyInitService.toggleComplexDisplay();
+        }
+
         swh.StartStopWatch();
         menu.SetActive(false);
-        enemyInitService.showEnemies(true);
         enemyInitService.initializeRandomAudioSource();
     }
 

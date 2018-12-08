@@ -35,27 +35,18 @@ public class TestCase {
         return timesFound == findLimit;
     }
 
-    public class FoundObject{
-        Vector3 position;
-        TimeSpan time;
+    public bool getBlind(){
+        return this.blind;
+    }
 
-        public FoundObject(Vector3 position, TimeSpan time){
-            this.position = position;
-            this.time = time;
-        }
+    public bool getRestricted()
+    {
+        return this.restricted;
+    }
 
-        public override string ToString()
-        {
-            return "Time: " + this.time + " Position: " + this.position;
-        }
-
-        public TimeSpan getTime(){
-            return this.time;
-        }
-
-        public Vector3 getPosition(){
-            return this.position;
-        }
+    public bool getSimpleVisual()
+    {
+        return this.simpleVisual;
     }
 
     public override string ToString()
@@ -71,5 +62,32 @@ public class TestCase {
         });
 
         return str;
+    }
+
+    public class FoundObject
+    {
+        Vector3 position;
+        TimeSpan time;
+
+        public FoundObject(Vector3 position, TimeSpan time)
+        {
+            this.position = position;
+            this.time = time;
+        }
+
+        public override string ToString()
+        {
+            return "Time: " + this.time + " Position: " + this.position;
+        }
+
+        public TimeSpan getTime()
+        {
+            return this.time;
+        }
+
+        public Vector3 getPosition()
+        {
+            return this.position;
+        }
     }
 }
