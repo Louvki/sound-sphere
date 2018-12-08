@@ -12,16 +12,12 @@ public class RayHit : MonoBehaviour
 
     float currentValue;
     private float speed = 100;
-    public Image loadingBar = GameObject.Find("UISelectionBar").GetComponent<Image>();
+    public Image loadingBar;
     StopWatchHelper sw = new StopWatchHelper();
-
-    public RayHit(Image loadingBar)
-    {
-        this.loadingBar = loadingBar;
-    }
 
     void Start()
     {
+        this.loadingBar = GameObject.Find("UISelectionBar").GetComponent<Image>();
         //sw.StartStopWatch();
     }
 
@@ -35,23 +31,44 @@ public class RayHit : MonoBehaviour
             {
                 if (EnemyHitEvent != null)
                 {
-                    var ee = new TimeSpan(1);
-                    EnemyHitEvent(ee);
+
+                    if (currentValue <= 100)
+                    {
+                        currentValue += speed * Time.deltaTime;
+                        loadingBar.fillAmount = currentValue / 100;
+                    }
+                    else
+                    {
+                        var ee = new TimeSpan(1);
+                        EnemyHitEvent(ee);
+                        ResetCircleAnim();
+                        //sw.ResetAndStartStopWatch();
+                    }
                 }
-            }
-            if (hit.transform.name.Equals("Start"))
+            } else if (hit.transform.name.Equals("Start"))
             {
                 if (StartHitEvent != null)
                 {
-                    StartHitEvent();
+                    if (currentValue <= 100)
+                    {
+                        currentValue += speed * Time.deltaTime;
+                        loadingBar.fillAmount = currentValue / 100;
+                    }
+                    else
+                    {
+                        StartHitEvent();
+                        ResetCircleAnim();
+                        //sw.ResetAndStartStopWatch();
+                    }
                 }
+            }else
+            {
+                ResetCircleAnim();
             }
-        }
-        else
+        }else
         {
             ResetCircleAnim();
-        };
-
+        }
     }
 
     public void HitCircleAnim(GameObject hit)
@@ -64,16 +81,6 @@ public class RayHit : MonoBehaviour
         else
         {
             ResetCircleAnim();
-            if (hit.transform.name.Equals("Enemy"))
-            {
-                //enemy.SpawnNewHit(hit.transform.gameObject);
-            }
-
-            if (hit.transform.name.Equals("Start"))
-            {
-
-            }
-
             //sw.ResetAndStartStopWatch();
         }
 
@@ -85,7 +92,7 @@ public class RayHit : MonoBehaviour
         if (loadingBar)
         {
 
-        loadingBar.fillAmount = 0f;
+            loadingBar.fillAmount = 0f;
         }
         currentValue = 0;
     }
