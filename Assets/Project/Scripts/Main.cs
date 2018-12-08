@@ -53,7 +53,7 @@ public class Main : MonoBehaviour
     public void SourceFound(TimeSpan time)
     {   
 
-        testCases[currentTestCaseIndex].SourceFound(swh.ResetAndStartStopWatch());
+        testCases[currentTestCaseIndex].SourceFound(swh.ResetAndStartStopWatch(), enemyInitService.getCurrentEnemy().transform.position);
         swh.ResetAndStartStopWatch();
         this.enemyInitService.initializeRandomAudioSource();
         if (testCases[currentTestCaseIndex].IsFinished())
@@ -67,8 +67,6 @@ public class Main : MonoBehaviour
                 LoadNextTestCase();
             }
         }
-        Debug.Log("-----------------------------------");
-        testCases[currentTestCaseIndex].times.ForEach(x => Debug.Log(x));
     }
 
     public void StartUseCase()

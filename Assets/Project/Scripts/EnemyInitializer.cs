@@ -28,14 +28,15 @@ public class EnemyInitializer : MonoBehaviour
     {
         enemies.ForEach(x =>
         {
-                x.SetActive(show);
+            x.SetActive(show);
         });
     }
 
-    public void muteAllEnemies(){
+    public void muteAllEnemies()
+    {
         enemies.ForEach(x =>
         {
-                x.transform.GetComponent<AudioSource>().enabled = false;
+            x.transform.GetComponent<AudioSource>().enabled = false;
         });
     }
 
@@ -108,4 +109,16 @@ public class EnemyInitializer : MonoBehaviour
         return pts;
     }
 
+    public GameObject getCurrentEnemy()
+    {
+        GameObject curEnemy = null;
+        enemies.ForEach(x =>
+        {
+            if (x.transform.GetComponent<AudioSource>().enabled == true)
+            {
+                curEnemy = x;
+            };
+        });
+        return curEnemy;
+    }
 }
