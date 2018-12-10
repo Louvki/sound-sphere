@@ -45,11 +45,7 @@ public class EnemyInitializer : MonoBehaviour
         muteAllEnemies();
         System.Random r = new System.Random();
 
-
-
         var enemy = enemies[r.Next(enemies.Count - 1)];
-
-
 
         while(foundObject != null && enemy.transform.position == foundObject.getPosition())
         {
