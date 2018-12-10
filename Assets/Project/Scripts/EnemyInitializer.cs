@@ -40,12 +40,27 @@ public class EnemyInitializer : MonoBehaviour
         });
     }
 
-    public void initializeRandomAudioSource()
+    public void initializeRandomAudioSource(TestCase.FoundObject foundObject = null)
     {
         muteAllEnemies();
         System.Random r = new System.Random();
+
+
+
         var enemy = enemies[r.Next(enemies.Count - 1)];
+
+
+
+        while(foundObject != null && enemy.transform.position == foundObject.getPosition())
+        {
+            enemy = enemies[r.Next(enemies.Count - 1)];
+            Debug.Log(foundObject.getPosition());
+        }
+
         enemy.transform.GetComponent<AudioSource>().enabled = true;
+
+        Debug.Log(enemy.transform.position);
+        Debug.Log("-----------------------------");
     }
 
     public void setEnemyDisplay(EnemyDisplay display)

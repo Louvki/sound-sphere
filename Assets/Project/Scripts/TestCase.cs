@@ -24,10 +24,10 @@ public class TestCase
         this.simpleVisual = simpleVisual;
     }
 
-    public void SourceFound(TimeSpan time, Vector3 position)
+    public void SourceFound(FoundObject foundObject)
     {
         timesFound++;
-        objects.Add(new FoundObject(position, time));
+        objects.Add(foundObject);
     }
 
     public bool IsFinished()
