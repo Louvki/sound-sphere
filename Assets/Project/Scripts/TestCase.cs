@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestCase {
+public class TestCase
+{
     string name;
     public string description { get; set; }
     bool blind;
@@ -12,7 +13,7 @@ public class TestCase {
 
     public List<FoundObject> objects = new List<FoundObject>();
     int timesFound = 0;
-    int findLimit = 2;
+    int findLimit = 12;
 
     public TestCase(string name, string description, bool blind, bool restricted, bool simpleVisual)
     {
@@ -27,7 +28,6 @@ public class TestCase {
     {
         timesFound++;
         objects.Add(new FoundObject(position, time));
-        objects.ForEach(x => Debug.Log(x.ToString()));
     }
 
     public bool IsFinished()
@@ -35,7 +35,8 @@ public class TestCase {
         return timesFound == findLimit;
     }
 
-    public bool getBlind(){
+    public bool getBlind()
+    {
         return this.blind;
     }
 
@@ -51,14 +52,19 @@ public class TestCase {
 
     public override string ToString()
     {
-        string str = 
-        this.name + System.Environment.NewLine + 
-        this.description + System.Environment.NewLine + 
-        "Blind: " + this.blind + System.Environment.NewLine + 
-        "Restricted: " + this.restricted + System.Environment.NewLine + 
-        "SimpleVisual: " + this.simpleVisual + System.Environment.NewLine;
-        objects.ForEach(x => {
-            str += " " + x.getTime().ToString() + " " + x.getPosition().ToString() + System.Environment.NewLine;
+        string settings = "";
+        if (this.blind) { settings += "Blind"; }
+        if (this.restricted) { settings += ", Restricted"; }
+        if (!this.simpleVisual) { settings += ", Complex Visuals"; }
+        if (settings.Length > 0) { settings += System.Environment.NewLine; }
+
+        string str =
+        this.name + System.Environment.NewLine +
+        this.description + System.Environment.NewLine +
+        settings;
+        objects.ForEach(x =>
+        {
+            str += " " + string.Format("{0:00}:{1:00}", x.getTime().Seconds, x.getTime().Milliseconds) +" " + x.getPosition().ToString() + System.Environment.NewLine;
         });
 
         return str;
@@ -77,7 +83,7 @@ public class TestCase {
 
         public override string ToString()
         {
-            return "Time: " + this.time + " Position: " + this.position;
+            return "Time: " + this.time.TotalSeconds + "seconds. Position: " + this.position;
         }
 
         public TimeSpan getTime()

@@ -2,39 +2,68 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    public void toggleComplex()
+    public GameObject player;
+
+    public void setDisplay(EnemyDisplay display, bool r)
+    {
+        switch (display)
+        {
+            case EnemyDisplay.Complex:
+                toggleComplex(r);
+                break;
+            case EnemyDisplay.Invisible:
+                toggleInvisible();
+                break;
+            case EnemyDisplay.Simple:
+                toggleSimple();
+                break;
+        }
+    }
+
+    private void toggleInvisible()
+    {
+        foreach (Transform child in gameObject.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+    }
+
+
+    private void toggleComplex(bool r)
     {
         foreach (Transform child in transform)
         {
             if (child.name == "Simple")
             {
                 child.gameObject.SetActive(false);
-            } else {
-                System.Random r = new System.Random();
-                int happyOrAngry = r.Next(1);
+            }
 
-                if (happyOrAngry == 1)
-                {
-                    child.gameObject.SetActive(false);
-                } else
-                {
-                    child.gameObject.SetActive(true);
-                }
+            if (child.name == "Happy")
+            {
+                child.gameObject.SetActive(r);
+                child.transform.LookAt(player.transform);
+            }
+            if (child.name == "Angry")
+            {
+                child.gameObject.SetActive(!r);
+                child.transform.LookAt(player.transform);
             }
         }
     }
 
-    public void toggleSimple()
+    private void toggleSimple()
     {
         foreach (Transform child in transform)
         {
-            if (child.name == "Happy" || child.name == "Angry" ) {
+            if (child.name == "Happy" || child.name == "Angry")
+            {
                 child.gameObject.SetActive(false);
             };
-            if(child.name == "Simple")
+            if (child.name == "Simple")
             {
                 child.gameObject.SetActive(true);
             }
@@ -42,3 +71,9 @@ public class Enemy : MonoBehaviour
     }
 }
 
+public enum EnemyDisplay
+{
+    Invisible = 1,
+    Simple = 2,
+    Complex = 3,
+}

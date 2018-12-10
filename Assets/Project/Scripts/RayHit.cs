@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class RayHit : MonoBehaviour
 {
-    public delegate void EnemyHit(TimeSpan time);
+    public delegate void EnemyHit();
     public delegate void StartHit();
     public delegate void RestartHit();
     public event EnemyHit EnemyHitEvent;
@@ -40,8 +40,7 @@ public class RayHit : MonoBehaviour
                     }
                     else
                     {
-                        var ee = new TimeSpan(1);
-                        EnemyHitEvent(ee);
+                        EnemyHitEvent();
                         ResetCircleAnim();
                     }
                 }

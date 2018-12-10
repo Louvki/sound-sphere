@@ -25,6 +25,11 @@ public class StopWatchHelper : MonoBehaviour {
         return elapsed;;
     }
 
+    public TimeSpan getElapsed()
+    {
+        TimeSpan elapsed = sw.Elapsed;
+        return elapsed;
+    }
     public void StartStopWatch(){
         sw.Start();
     }

@@ -12,7 +12,7 @@ public class EnemyInitializer : MonoBehaviour
     public void InitializeEnemyList(GameObject enemy)
     {
         float scaling = 8;
-        Vector3[] pts = PointsOnSphere(64);
+        Vector3[] pts = PointsOnSphere(12);
         enemies = new List<GameObject>();
         int i = 0;
 
@@ -46,41 +46,15 @@ public class EnemyInitializer : MonoBehaviour
         System.Random r = new System.Random();
         var enemy = enemies[r.Next(enemies.Count - 1)];
         enemy.transform.GetComponent<AudioSource>().enabled = true;
-
-        //Delete
-        //disableAllEnemies();
-        //enemy.SetActive(true);
     }
 
-    public void toggleSimpleDisplay()
+    public void setEnemyDisplay(EnemyDisplay display)
     {
+        bool thisIsDumb = true;
         enemies.ForEach(enemy =>
         {
-            enemy.GetComponent<Enemy>().toggleSimple();
-        });
-    }
-
-    public void toggleComplexDisplay()
-    {
-        enemies.ForEach(enemy =>
-        {
-            enemy.GetComponent<Enemy>().toggleComplex();
-        });
-    }
-
-    public void disableAllEnemies()
-    {
-        enemies.ForEach(enemy =>
-        {
-            enemy.SetActive(false);
-        });
-    }
-
-    public void enableAllEnemies()
-    {
-        enemies.ForEach(enemy =>
-        {
-            enemy.SetActive(true);
+            enemy.GetComponent<Enemy>().setDisplay(display, thisIsDumb);
+            thisIsDumb = !thisIsDumb;
         });
     }
 
