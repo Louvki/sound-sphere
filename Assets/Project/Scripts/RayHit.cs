@@ -26,7 +26,8 @@ public class RayHit : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit))
+        Camera main = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        if (Physics.Raycast(main.transform.position, main.transform.forward, out hit))
         {
             if (hit.transform.tag.Equals("Enemy") && hit.transform.GetComponent<AudioSource>().enabled == true)
             {
