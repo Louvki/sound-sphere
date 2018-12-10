@@ -54,13 +54,9 @@ public class EnemyInitializer : MonoBehaviour
         while(foundObject != null && enemy.transform.position == foundObject.getPosition())
         {
             enemy = enemies[r.Next(enemies.Count - 1)];
-            Debug.Log(foundObject.getPosition());
         }
 
         enemy.transform.GetComponent<AudioSource>().enabled = true;
-
-        Debug.Log(enemy.transform.position);
-        Debug.Log("-----------------------------");
     }
 
     public void setEnemyDisplay(EnemyDisplay display)

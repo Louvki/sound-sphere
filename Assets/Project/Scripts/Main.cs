@@ -45,7 +45,7 @@ public class Main : MonoBehaviour
 
     private void Update()
     {
-        if (swh.getElapsed().Seconds > 30)
+        if (swh.getElapsed().Seconds > 5)
         {
             SourceFound();
         };
