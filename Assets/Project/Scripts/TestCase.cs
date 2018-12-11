@@ -12,7 +12,7 @@ public class TestCase
     bool simpleVisual;
 
     public List<FoundObject> objects = new List<FoundObject>();
-    int timesFound = 0;
+    public int timesFound = 0;
     int findLimit = 12;
 
     public TestCase(string name, string description, bool blind, bool restricted, bool simpleVisual)
@@ -24,6 +24,12 @@ public class TestCase
         this.simpleVisual = simpleVisual;
     }
 
+    public void Reset()
+    {
+        timesFound = 0;
+        objects = new List<FoundObject>();
+    }
+
     public void SourceFound(FoundObject foundObject)
     {
         timesFound++;
@@ -32,7 +38,7 @@ public class TestCase
 
     public bool IsFinished()
     {
-        return timesFound == findLimit;
+        return timesFound >= findLimit;
     }
 
     public bool getBlind()

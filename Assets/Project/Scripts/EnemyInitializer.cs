@@ -6,8 +6,11 @@ using UnityEngine;
 public class EnemyInitializer : MonoBehaviour
 {
     public Transform enemy;
-    List<GameObject> enemies = new List<GameObject>();
 
+
+    System.Random r = new System.Random();
+    List<GameObject> enemies = new List<GameObject>();
+    int lastSoundSourceIndex = -1;
 
     public void InitializeEnemyList(GameObject enemy)
     {
@@ -43,7 +46,12 @@ public class EnemyInitializer : MonoBehaviour
     public void initializeRandomAudioSource(TestCase.FoundObject foundObject = null)
     {
         muteAllEnemies();
-        System.Random r = new System.Random();
+
+        var enemyIndex = r.Next(enemies.Count - 1);
+        while(enemyIndex == lastSoundSourceIndex)
+        {
+            enemyIndex = r.Next(enemies.Count - 1);
+        }
 
         var enemy = enemies[r.Next(enemies.Count - 1)];
 
@@ -52,6 +60,7 @@ public class EnemyInitializer : MonoBehaviour
             enemy = enemies[r.Next(enemies.Count - 1)];
         }
 
+        lastSoundSourceIndex = enemyIndex;
         enemy.transform.GetComponent<AudioSource>().enabled = true;
     }
 

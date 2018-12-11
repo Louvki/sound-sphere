@@ -45,7 +45,7 @@ public class Main : MonoBehaviour
 
     private void Update()
     {
-        if (swh.getElapsed().Seconds > 30)
+        if (swh.getElapsed().Seconds > 25)
         {
             SourceFound();
         };
@@ -97,6 +97,10 @@ public class Main : MonoBehaviour
     {
         endScreen.SetActive(false);
         currentTestCaseIndex = -1;
+        testCases.ForEach(x =>
+        {
+            x.Reset();
+        });
         LoadNextTestCase();
     }
 
@@ -176,9 +180,9 @@ public class Main : MonoBehaviour
     private void InitTestCases()
     {
         TestCase t1 = new TestCase("Test #1", "Try to locate the source of the sound." + Environment.NewLine + " When the crosshair is over the source of the sound it will start to fill up.", false, false, true);
+        TestCase t2 = new TestCase("Test #2", "This time there will be no visuals." + Environment.NewLine + " Focus on the sound to find it's source", true, false, true);
         TestCase t3 = new TestCase("Test #3", "Ups, I think I spilled something on the lens.", false, true, true);
         TestCase t4 = new TestCase("Test #4", "This might count as creepy", false, false, false);
-        TestCase t2 = new TestCase("Test #2", "This time there will be no visuals." + Environment.NewLine + " Focus on the sound to find it's source", true, false, true);
         testCases.Add(t1);
         testCases.Add(t2);
         testCases.Add(t3);
